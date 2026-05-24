@@ -1,0 +1,19 @@
+Network based intrusion detection system using Machine Learning 
+
+How to run the project
+
+Requirements
+- python
+- install dependencies = pip install -r requirements.txt
+
+Run Random_Forest_Compare.py to see the comparison of both models used 
+Logistic Regression and Random Forest 
+- python src/Random_Forest_Compare.py
+
+Save the models using save_model.py, before running the GUI
+- python src/save_model.py
+this saves the random_forest_model.pkl and preprocess.pkl inside the models folder.
+
+Finally run GUI
+- python src/GUI_App.py
+
