@@ -46,19 +46,29 @@ X_test_encoded = encoder.transform(X_test)
 
 def evaluate_model(name, model):
     model.fit(X_train_encoded, y_train)
+
     preds = model.predict(X_test_encoded)
 
+    ## train data prediction
+    train_preds = model.predict(X_train_encoded)
+
     print("Model:", name)
-    print("Accuracy:", accuracy_score(y_test, preds))
-    
-    cm = confusion_matrix(y_test, preds)
-    disp = ConfusionMatrixDisplay(confusion_matrix=cm, display_labels=["attack", "normal"])
+    print("Test Accuracy:", accuracy_score(y_test, preds))
+    print("Training Accuracy:", accuracy_score(y_train, train_preds))
 
     print("\nClassification Report:")
     print(classification_report(y_test, preds))
 
+    cm_train = confusion_matrix(y_train, train_preds)
+    disp_train = ConfusionMatrixDisplay(confusion_matrix=cm_train, display_labels=["attack", "normal"])
+    disp_train.plot(cmap="Reds")
+    plt.title(f"Confusion Matrix (Train) - {name}")#
+
+    cm_test = confusion_matrix(y_test, preds)
+    disp = ConfusionMatrixDisplay(confusion_matrix=cm_test, display_labels=["attack", "normal"])
     disp.plot(cmap="Blues")
-    plt.title(f"Confusion Matrix - {name}")
+    plt.title(f"Confusion Matrix (Test) - {name}")
+
 
 ### Logistic Regression
 log_reg = LogisticRegression(max_iter=2000)
